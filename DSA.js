@@ -129,6 +129,154 @@ function queue(){
 }
 var q = new queue();
 q.enqueue(2);q.enqueue(3);q.front();console.log(q.dequeue());
+///////////***********Hash Table */////////////////////
+//Hash Function
+var hash = (String, max){
+    var hash = 0;
+    for(var i=0; i<String.length; i++){
+        hash+=String.charCodeAt(i);
+    }
+    return hash%max;
+};
+let hashtable = function(){
+    let storage = [];
+    const storagelimit = 4;
+    this.print = function(){
+        console.log(storage);
+    };
+    this.add = function(key,value){
+        var index = hash(key, storagelimit);
+        if(Storage[index]==undefined){
+            Storage[index] = [[key,value]]; 
+        }
+        else{
+            var inserted = false;
+            for(var i=0; i<Storage[index].length; i++){
+                if(key==Storage[index][0]){
+                    Storage[index][1]=value;
+                    inserted = true;
+                    break;
+                }
+            }
+            if(inserted==false){
+                Storage[index].push([key,value]);
+            }
+        }
+    };
+    this.remove = function(key){
+        var index = hash(key, storagelimit);
+        if(storage[index].length==1&&storage[index][0][0]==key){
+            delete storage[index];
+        }
+        else{
+            for(int i=0; i<storage[index].length;i++){
+                if(key==storage[index][i][0]){
+                    delete storage[index][i];
+                }
+            }
+        }
+    };
+    this.lookup = function(key){
+        var index = hash(key,storagelimit);
+        if(storage[index]=undefined){
+            return undefined;
+        }
+        else{
+            for(int i=0; i<storage[index].length;i++){
+                if(key==storage[index][i][0]){
+                    return storage[index][i];
+                }
+            }
+        }
+    };
+}
+//////////////////////**********************Linked List**********************///////////////////
+function Linkedlist(){
+    var len = 0;
+    var head =null;
+    var Node(data){
+        this.data = data;
+        this.next = null;
+    };
+    this.size= function(){
+        return len;
+    }
+    this.head = function(){
+        return head;
+    }
+    this.add = function(element){
+        var node = new Node(element);
+        if(head==null){
+            head = node;
+        }
+        else{
+            var current = head;
+            while(current.next){
+                current=current.next;
+            }
+            current.next=node;
+        }
+        len++;
+    };
+    this.remove= function(data){
+        var current = head;
+        var prev;
+        if(current.data==data){
+            head = head.next;
+        }
+        else{
+            while(current.data!=data){
+                prev = current;
+                current=current.next;
+            }
+            prev.next = current.next;
+        }
+        len--;
+    }
+    this.isempty = function(){
+        return len==0;
+    };
+    this.indexOf = function(data){
+        var current = head;
+        var index =-1;
+        while(current){
+            index+=1;
+            if(current.data == data){
+                return index;
+            }
+            current = current.next;
+
+        }
+        return -1;
+    };
+    this.elementAt = function(ind){
+        var current = head;
+        for(int i=0; i<ind; i++){
+            current= current.next;
+        }
+        return current.data;
+    };
+    this.addat = function(val,ind){
+        var node = new Node(val);
+        if(ind>len){
+            return false;
+        }
+        if(ind ==0){
+            node.next = current;
+            head = node;
+        }
+        var prev;
+        else{
+            for(int i=0; i<ind; i++){
+                prev = current;
+                current= current.next;
+            }
+            node.next = current;
+            prev.next = node;
+        }
+        len++;
+    };
+}
 //////////////**********************Binary Search tree *//////////////////////
 class Node{
     constructor(data, left = null, right = null){
@@ -233,12 +381,11 @@ class BST{
         }
         this.root = this.removenode(this.root,data);
     }
+
 }
 var bst = new BST();
 bst.add(3);bst.add(6);bst.add(1);bst.add(45);bst.add(-23);
-console.log(bst,minh());
-console.log(bst, maxh());
-console.log(bst, isb());
+/////////////////////////////************Trie*******************//////////////////
 
 
 
